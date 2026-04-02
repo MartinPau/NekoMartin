@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.M.A.R.T. Diagnostic HUD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- API Key Splash Screen -->
+    <div id="api-splash" class="api-splash">
+        <div class="splash-inner">
+            <div class="splash-logo">NEKO_SYSTEMS<span style="color:var(--cyan)">.</span></div>
+            <p class="splash-sub">A.I. MEDICAL INTELLIGENCE HUB</p>
+            <div class="splash-form">
+                <p class="splash-hint">To unlock the A.I. Diagnostic Doctor, enter your free Google Gemini API key below.<br>The key is stored only in your browser and never transmitted to any third party.</p>
+                <input type="password" id="splash-api-key" placeholder="AIzaSy..." class="splash-input">
+                <button class="cyber-btn" onclick="activateWithKey()" style="width:100%; justify-content:center; padding:14px;">INITIALIZE NEURAL LINK</button>
+                <button class="splash-skip" onclick="skipApiKey()">Continue without A.I. Doctor →</button>
+            </div>
+        </div>
+    </div>
+    <!-- Deep Space Background Overlays -->
+    <div class="hud-bg">
+        <div class="grid-layer"></div>
+        <div class="vignette"></div>
+    </div>
+
+    <!-- Top Status HUD -->
+    <header class="top-hud">
+        <div class="hud-corner-lt">
+            <h1 class="brand-glitch" data-text="NEKO_SYSTEMS">NEKO_SYSTEMS</h1>
+            <button id="btn-overview" class="cyber-btn">SYSTEM OVERVIEW</button>
+        </div>
+        <div class="hud-corner-rt">
+            <div class="patient-id">
+                <span class="text-cyan">SUBJECT:</span> <span id="patient-name">LOADING...</span>
+            </div>
+            <div class="patient-age">
+                <span class="text-cyan">AGE_YRS:</span> <span id="patient-age">--</span>
+            </div>
+            <div class="patient-scan">
+                <span class="text-cyan">LST_SCAN:</span> <span id="latest-scan-date">--/--/----</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Diagnostic Area -->
+    <main class="diagnostic-theater">
+        
+        <!-- INTRO LEFT: Summary -->
+        <aside class="side-panel left-panel" id="intro-left">
+            <div class="panel-header">
+                <div class="tech-deco-line"></div>
+                <h2 class="neon-title">DIAGNOSTIC SUMMARY</h2>
+            </div>
+            <div class="panel-content">
+                <div class="glass-box">
+                    <p id="system-summary" class="cyber-text-large">
+                        <!-- JS injected -->
+                    </p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- INTRO RIGHT: AI Doctor Chat -->
+        <aside class="side-panel right-panel" id="intro-right">
+            <div class="panel-header text-right">
+                <div class="tech-deco-line"></div>
+                <h2 class="neon-title">A.I. DOCTOR</h2>
+            </div>
+            <div class="panel-content">
+                <div class="glass-box" style="display:flex; flex-direction:column; padding:25px; height:100%;">
+                    <p style="font-size:0.75rem; color:rgba(255,255,255,0.4); margin-bottom:16px; letter-spacing:0.5px;">GEMINI NEURAL DIAGNOSTICIAN — Consult your health data.</p>
+                    <div id="chat-history" class="chat-history">
+                        <div class="chat-msg ai-msg"><span class="dr-tag">Dr. Gemini:</span> Neural link established. I have access to your complete diagnostic record spanning 2024–2026. How can I assist your health protocol today?</div>
+                    </div>
+                    <div id="chat-locked-msg" class="chat-locked" style="display:none;">
+                        <span style="color:rgba(255,255,255,0.4);">⚠ No API key provided. Restart the page to add your Gemini key.</span>
+                    </div>
+                    <div id="chat-input-area" class="chat-input-area">
+                        <input type="text" id="chat-input" placeholder="Ask about your LDL, BMI, heart age..." class="chat-text-input" onkeydown="if(event.key==='Enter') sendChatMessage()">
+                        <button class="cyber-btn chat-send-btn" onclick="sendChatMessage()">↑</button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+
+        <!-- ACTUAL DATA LEFT: Metrics -->
+        <aside class="side-panel left-panel hidden-slide-left" id="panel-left">
+            <div class="panel-header">
+                <div class="tech-deco-line"></div>
+                <h2 id="view-title" class="neon-title">AWAITING INPUT</h2>
+            </div>
+            <div class="panel-content">
+                <div id="metrics-grid" class="metrics-grid">
+                    <!-- JS Injected Metrics -->
+                </div>
+            </div>
+        </aside>
+
+        <!-- Center Hologram Area -->
+        <div class="hologram-stage">
+            <div class="hologram-wrapper">
+                <img src="Style photos/Gemini_Generated_Image_9cjw1s9cjw1s9cjw.png" alt="Patient Subject" class="patient-hologram">
+                <div class="scanner-beam"></div>
+                <div class="hologram-base"></div>
+                
+                <!-- Orbiting Nodes (Injected via JS) -->
+                <div id="nodes-container" class="nodes-layer"></div>
+            </div>
+        </div>
+
+        <!-- ACTUAL DATA RIGHT: Trends -->
+        <aside class="side-panel right-panel hidden-slide-right" id="panel-right">
+            <div class="panel-header text-right">
+                <div class="tech-deco-line"></div>
+                <h2 class="neon-title">SYS.TREND_ANALYSIS</h2>
+            </div>
+            <div class="panel-content">
+                <div id="charts-list" class="charts-list-container">
+                    <!-- Dynamic chart canvases injected via JS -->
+                </div>
+            </div>
+        </aside>
+
+    </main>
+    
+    <!-- Loader Overlay -->
+    <div id="loader" class="cyber-loader">
+        <div class="spin-ring"></div>
+        <div class="loader-text pulse">INITIALIZING BIOMETRICS...</div>
+    </div>
+
+    <!-- Data & Logic -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

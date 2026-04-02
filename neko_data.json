@@ -1,0 +1,70 @@
+{
+  "patientInfo": {
+    "name": "Martin",
+    "birthYear": 1988
+  },
+  "scans": [
+    {
+      "date": "2026-03-28",
+      "age": 38,
+      "metrics": {
+        "hjarta_och_cirkulation": {
+          "hjartalder": {"value": 38, "unit": "âr", "status": "MATCHAR"},
+          "blodtryck_systoliskt": {"value": 129, "unit": "mmHg", "status": "NORMAL"},
+          "blodtryck_diastoliskt": {"value": 67, "unit": "mmHg", "status": "NORMAL"},
+          "ankeltryck": {"value": 149, "unit": "mmHg", "status": "NORMAL"},
+          "abi": {"value": 1.15, "unit": "", "status": "NORMAL"},
+          "syremattnad": {"value": 97, "unit": "%", "status": "OPTIMALT"}
+        },
+        "ekg": {
+          "puls": {"value": 60, "unit": "slag/min", "status": "NORMAL"},
+          "overledningstid": {"value": 168, "unit": "ms", "status": "NORMAL"},
+          "kammaraktiveringstid": {"value": 92, "unit": "ms", "status": "NORMAL"},
+          "aterhamtningstid": {"value": 410, "unit": "ms", "status": "NORMAL"},
+          "hjartljudsinspelning": {"value": 9, "unit": "s", "status": "NORMAL"}
+        },
+        "blodfetter": {
+          "totalt_kolesterol": {"value": 4.5, "unit": "mmol/L", "status": "OPTIMALT"},
+          "hdl": {"value": 1.37, "unit": "mmol/L", "status": "NORMAL"},
+          "non_hdl": {"value": 3.13, "unit": "mmol/L", "status": "NORMAL"},
+          "ldl": {"value": 2.44, "unit": "mmol/L", "status": "OPTIMALT"},
+          "triglycerider": {"value": 1.63, "unit": "mmol/L", "status": "NORMAL"}
+        },
+        "kropp": {
+          "ogontryck": {"value": 12, "unit": "mmHg", "status": "NORMAL"},
+          "greppstyrka_hoger": {"value": 50, "unit": "kg", "status": "NORMAL"},
+          "greppstyrka_vanster": {"value": 43, "unit": "kg", "status": "NORMAL"},
+          "vikt": {"value": 78, "unit": "kg", "status": "NORMAL"},
+          "bmi": {"value": 24, "unit": "kg/m2", "status": "NORMAL"},
+          "hcrp": {"value": 0.5, "unit": "mg/L", "status": "NORMAL"}
+        },
+        "diabetes": {
+          "hba1c": {"value": 36, "unit": "mmol/mol", "status": "OPTIMALT"},
+          "glukos": {"value": 6.2, "unit": "mmol/L", "status": "NORMAL"}
+        },
+        "immunforsvar": {
+          "vita_blodkroppar": {"value": 4.9, "unit": "x10^9/L", "status": "NORMAL"},
+          "neutrofiler": {"value": 2.2, "unit": "x10^9/L", "status": "NORMAL"},
+          "eosinofiler": {"value": 0, "unit": "x10^9/L", "status": "NORMAL"},
+          "lymfocyter": {"value": 2.4, "unit": "x10^9/L", "status": "NORMAL"},
+          "basofiler": {"value": 0, "unit": "x10^9/L", "status": "NORMAL"},
+          "hs_crp": {"value": 0.8, "unit": "mg/L", "status": "OPTIMALT"}
+        },
+        "hematologi": {
+          "hemoglobin": {"value": 145, "unit": "g/L", "status": "NORMAL"}
+        },
+        "hud": {
+          "hudforandringar": {"value": 664, "unit": "", "status": "Baslinje"}
+        }
+      },
+      "recommendations": [
+        "Fortsätt med nuvarande träningsrutin – din gym- och spinningvanor bidrar till stark hjärt- och muskelhälsa.",
+        "Förfina kosten ytterligare mot mer medelhavsinspirerade matvanor: mindre rött kött och mejeriprodukter, mer grönsaker, baljväxter och fisk. Byt ut smör mot raps- eller olivolja.",
+        "Var extra uppmärksam på sockerintag och processade livsmedel – särskilt med tanke på intresse för hembakat bröd och efterrätter.",
+        "Följ upp blodsockret hos husläkare eller via arbetsplatsen när möjlighet ges, särskilt eftersom långtidsvärdet ligger något högre än genomsnittet.",
+        "Kontrollera om ditt blodsocker via din vårdcentral vid tillfälle."
+      ],
+      "summary": "Dina resultat visar överlag goda värden, särskilt inom blodtryck, blodfetter och blodsocker. Det är positivt att både hjärt- och cirkulationssystemet fungerar väl, och att din kroppssammansättning ser bra ut. Ett litet högre långtidsblodsocker jämfört med andra i din åldersgrupp är inget att oroa sig för, då det sannolikt påverkats av morgonens smoothie. Greppstyrkan på höger hand sticker ut som stark, medan vänster hand ligger något under genomsnittet. Din aktiva livsstil bidrar verkligen till dessa fina resultat. Kostvanor påverkas av din flickväns veganska diet, vilket ger dig ett vegetariskt inslag."
+    }
+  ]
+}

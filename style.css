@@ -636,3 +636,217 @@ body {
 .chat-text-input:focus { border-color: rgba(0,229,255,0.4); }
 .chat-send-btn { padding: 12px 18px; border-radius: 12px; font-size: 1.1rem; }
 .chat-msg.thinking { opacity: 0.5; font-style: italic; }
+
+/* ═══════════════════════════════════════════════
+   TABLET (≤ 1100px) — compress panels side-by-side
+════════════════════════════════════════════════ */
+@media (max-width: 1100px) {
+    .top-hud { padding: 20px 24px; }
+    .brand-glitch { font-size: 1.4rem; }
+    .hud-corner-rt { gap: 18px; padding: 10px 18px; }
+
+    .side-panel { width: 300px; }
+    .left-panel  { left: 16px; }
+    .right-panel { right: 16px; }
+
+    .hologram-stage { flex: 0 0 280px; }
+
+    .neon-title { font-size: 1.5rem; }
+    .m-val { font-size: 2rem; }
+}
+
+/* ═══════════════════════════════════════════════
+   MOBILE (≤ 768px) — full vertical stacked layout
+════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+    /* ── Body layout ── */
+    body {
+        overflow: hidden;
+        height: 100dvh;         /* dynamic viewport for mobile browsers */
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* ── Header ── */
+    .top-hud {
+        padding: 14px 16px;
+        flex-shrink: 0;
+    }
+    .brand-glitch { font-size: 1.2rem; }
+    .cyber-btn { padding: 8px 14px; font-size: 0.78rem; }
+    .cyber-btn::before { width: 5px; height: 5px; }
+
+    /* Compact patient info — hide labels, stack values */
+    .hud-corner-rt {
+        gap: 12px;
+        padding: 8px 14px;
+        border-radius: 30px;
+    }
+    .patient-id .text-cyan,
+    .patient-age .text-cyan,
+    .patient-scan .text-cyan { font-size: 0.6rem; margin-bottom: 1px; }
+    .patient-id, .patient-age, .patient-scan { font-size: 0.78rem; }
+
+    /* ── Main theater — fills remaining viewport ── */
+    .diagnostic-theater {
+        flex: 1;
+        overflow: hidden;
+        padding-bottom: 0;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+    }
+
+    /* ── Hologram stage — shrunk, centered at top of theater ── */
+    .hologram-stage {
+        flex: 0 0 auto;
+        width: 100%;
+        height: 38vh;
+        min-height: 220px;
+        max-height: 300px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .patient-hologram {
+        height: 100%;
+        width: auto;
+        max-height: 300px;
+    }
+
+    /* ── Side panels — fullwidth bottom sheet on mobile ── */
+    .side-panel {
+        position: absolute;
+        width: 100%;
+        left: 0 !important;
+        right: 0 !important;
+        top: auto;
+        /* sits at bottom of theater, above tab bar */
+        bottom: 56px;            /* height of .mob-tab-bar */
+        height: calc(100% - 38vh - 56px);
+        min-height: 200px;
+        z-index: 20;
+        flex-direction: column;
+        padding: 0 12px;
+    }
+
+    /* Reset the slide-in transform axes for mobile (vertical instead) */
+    .hidden-slide-left  { transform: translateY(110%); opacity: 0; pointer-events: none; }
+    .hidden-slide-right { transform: translateY(110%); opacity: 0; pointer-events: none; }
+
+    /* Visible state — same class used by desktop */
+    .side-panel:not(.hidden-slide-left):not(.hidden-slide-right) {
+        transform: translateY(0) !important;
+    }
+
+    .panel-header { margin-bottom: 12px; }
+    .neon-title   { font-size: 1.3rem; }
+
+    .glass-box {
+        border-radius: 20px;
+        padding: 18px;
+    }
+
+    .panel-content {
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* ── Metric cards ── */
+    .metric-data-row { padding: 14px 16px; }
+    .m-val  { font-size: 1.9rem; }
+    .m-unit { font-size: 0.78rem; }
+    .m-anim-slot { width: 38px; height: 38px; border-radius: 10px; }
+
+    /* ── Chart boxes ── */
+    .chart-box    { height: 220px; padding: 16px; border-radius: 20px; }
+    .ecg-chart-box { height: 200px; padding: 16px; border-radius: 20px; }
+
+    /* ── Node labels — don't let them overflow ── */
+    .holo-node::after {
+        font-size: 0.65rem;
+        padding: 4px 10px;
+        border-radius: 14px;
+    }
+
+    /* ── Header overflow fix — hide date on very cramped screens ── */
+    .top-hud { flex-wrap: nowrap; overflow: hidden; }
+    .hud-corner-rt { flex-shrink: 1; min-width: 0; overflow: hidden; }
+
+    /* ── On mobile body view: intro panels show one at a time via JS ── */
+    /* Both default-visible intro panels overlap on mobile; hide intro-right initially */
+    #intro-right { display: none; }
+    /* But show it when it's been explicitly revealed via tab (JS removes display:none) */
+    #intro-right.mob-visible { display: flex; }
+
+    /* Intro left fills full width when showing */
+    #intro-left { width: 100%; }
+
+    .mob-tab-bar {
+        display: flex !important;     /* hidden on desktop, shown on mobile */
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        height: 56px;
+        background: rgba(8, 10, 18, 0.92);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(255,255,255,0.07);
+        z-index: 30;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .mob-tab {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        cursor: pointer;
+        color: rgba(255,255,255,0.35);
+        font-size: 0.58rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        transition: color 0.2s;
+        padding: 6px 0;
+    }
+    .mob-tab svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+    .mob-tab.active { color: var(--cyan); }
+    .mob-tab.active svg { filter: drop-shadow(0 0 6px var(--cyan)); }
+
+    /* Intro panels also need vertical slide on mobile */
+    #intro-left:not(.hidden-slide-left),
+    #intro-right:not(.hidden-slide-right) {
+        transform: translateY(0) !important;
+        opacity: 1;
+    }
+}
+
+/* ═══════════════════════════════════════════════
+   SMALL PHONES (≤ 420px)
+════════════════════════════════════════════════ */
+@media (max-width: 420px) {
+    .top-hud { padding: 10px 12px; gap: 8px; }
+    .brand-glitch { font-size: 1.05rem; }
+    .hud-corner-rt { gap: 8px; padding: 7px 12px; }
+
+    /* On very small screens hide the patient-scan field */
+    .patient-scan { display: none; }
+
+    .hologram-stage { height: 32vh; min-height: 180px; }
+    .side-panel { bottom: 52px; height: calc(100% - 32vh - 52px); }
+    .mob-tab-bar { height: 52px; }
+
+    .neon-title  { font-size: 1.1rem; }
+    .m-val       { font-size: 1.7rem; }
+    .glass-box   { padding: 14px; border-radius: 16px; }
+}
+
+/* Desktop hides the tab bar */
+.mob-tab-bar { display: none; }
+

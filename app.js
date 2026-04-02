@@ -191,6 +191,70 @@ function showOverview() {
     }, 400); // Wait for actual to disappear
 }
 
+// ─────────────────────────────────────────────
+// Mobile Tab Navigation
+// ─────────────────────────────────────────────
+let _mobActiveTab = 'body'; // track current tab
+
+function mobSwitchTab(tab) {
+    const isMobile = window.innerWidth <= 768;
+    _mobActiveTab = tab;
+
+    // Update active state on tab buttons
+    ['body', 'metrics', 'trends', 'doctor'].forEach(t => {
+        const el = document.getElementById(`mob-tab-${t}`);
+        if (el) el.classList.toggle('active', t === tab);
+    });
+
+    if (!isMobile) return; // no-op on desktop
+
+    const panelLeft  = document.getElementById('panel-left');
+    const panelRight = document.getElementById('panel-right');
+    const introLeft  = document.getElementById('intro-left');
+    const introRight = document.getElementById('intro-right');
+
+    const hasActiveNode = !!document.querySelector('.holo-node.active');
+
+    // Helper: completely hide slide panels
+    const hideSlide = (el) => {
+        if (!el) return;
+        el.classList.add('hidden-slide-left');
+        el.classList.add('hidden-slide-right');
+    };
+    const showSlide = (el) => {
+        if (!el) return;
+        el.classList.remove('hidden-slide-left');
+        el.classList.remove('hidden-slide-right');
+    };
+
+    // Hide everything first
+    hideSlide(panelLeft);
+    hideSlide(panelRight);
+    hideSlide(introLeft);
+    hideSlide(introRight);
+    introRight.classList.remove('mob-visible');
+
+    if (tab === 'body') {
+        // Body tab: show hologram only — all panels hidden
+        // (nothing to show)
+    } else if (tab === 'metrics') {
+        if (hasActiveNode) {
+            showSlide(panelLeft);
+        } else {
+            showSlide(introLeft);
+        }
+    } else if (tab === 'trends') {
+        if (hasActiveNode) {
+            showSlide(panelRight);
+        }
+        // If no node selected, trends tab shows nothing (hologram still visible)
+    } else if (tab === 'doctor') {
+        introRight.classList.add('mob-visible');
+        showSlide(introRight);
+    }
+}
+
+
 function buildNodes(latestScan) {
     const container = document.getElementById('nodes-container');
     const categories = Object.keys(latestScan.metrics);
@@ -235,8 +299,20 @@ function triggerPanels(categoryKey, latestScan, viewLabel) {
         renderMetricsLogic(categoryKey, latestScan);
         renderNeonCharts(categoryKey);
         
-        leftP.classList.remove('hidden-slide-left');
-        rightP.classList.remove('hidden-slide-right');
+        // On desktop: show both panels simultaneously
+        // On mobile: show left panel first, tab bar reflects 'metrics'
+        if (window.innerWidth <= 768) {
+            leftP.classList.remove('hidden-slide-left');
+            // Update tab bar state to METRICS without hiding the panel we just showed
+            _mobActiveTab = 'metrics';
+            ['body','metrics','trends','doctor'].forEach(t => {
+                const el = document.getElementById(`mob-tab-${t}`);
+                if (el) el.classList.toggle('active', t === 'metrics');
+            });
+        } else {
+            leftP.classList.remove('hidden-slide-left');
+            rightP.classList.remove('hidden-slide-right');
+        }
     }, 400);
 }
 

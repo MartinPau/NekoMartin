@@ -129,6 +129,27 @@
         </aside>
 
     </main>
+
+    <!-- Mobile Bottom Tab Bar (hidden on desktop via CSS) -->
+    <nav class="mob-tab-bar" id="mob-tab-bar">
+        <button class="mob-tab active" id="mob-tab-body" onclick="mobSwitchTab('body')" aria-label="Body view">
+            <svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM6 10a6 6 0 0 1 12 0v2H6v-2zm0 4h12v8H6v-8z"/></svg>
+            BODY
+        </button>
+        <button class="mob-tab" id="mob-tab-metrics" onclick="mobSwitchTab('metrics')" aria-label="Metrics panel">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            METRICS
+        </button>
+        <button class="mob-tab" id="mob-tab-trends" onclick="mobSwitchTab('trends')" aria-label="Trends panel">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            TRENDS
+        </button>
+        <button class="mob-tab" id="mob-tab-doctor" onclick="mobSwitchTab('doctor')" aria-label="AI Doctor">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            DOCTOR
+        </button>
+    </nav>
+
     
     <!-- Loader Overlay -->
     <div id="loader" class="cyber-loader">
